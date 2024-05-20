@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "Fugent_Model"
-version = "0.0.7"
+version = "0.0.1"
 authors = [
   { name="James Hammer", email="jhammer3@vols.utk.edu" },
 ]
