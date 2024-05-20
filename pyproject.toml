@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Fugent_Model"
+version = "0.0.7"
+authors = [
+  { name="James Hammer", email="jhammer3@vols.utk.edu" },
+]
+description = "code required for training and running Fugent Agents"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "pandas==2.1.4",
+  "matplotlib==3.8.4",
+  "scipy==1.11.4",
+  "tensorflow==2.15.0.post1",
+  "tf-slim==1.1.0",
+  "pillow==10.3.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/seelabutk/xgc_poincare"
+Issues = "https://github.com/seelabutk/XGC_Poincare/issues"
