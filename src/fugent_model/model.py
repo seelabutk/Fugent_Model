@@ -127,7 +127,7 @@ def model(embedded, lstm_history_size, lstm_size, state_size, img_size, action_s
     return Actor, Critic
     
 class A3CAgent:
-    def __init__(self, model_path, envClass, learning_rate=0.00025, episodes=100, name=None, load_only=False):
+    def __init__(self, model_path, envClass, learning_rate=0.00025, episodes=100, name=None, load_only=False, load_path=None):
         self.environment = envClass
         self.env = self.environment()
         self.lock = Lock()
@@ -148,7 +148,7 @@ class A3CAgent:
         self.episodes = episodes
         self.learning_rate = learning_rate
         
-        self.save_path = model_path or os.path.join(os.path.dirname(__file__), "Models")
+        self.save_path = load_path if load_path is not None else os.path.join(os.path.dirname(__file__), "Models")
         self.save_name = self.name
         self.model_name = os.path.join(self.save_path, self.save_name)
         
@@ -320,20 +320,3 @@ class A3CAgent:
         # training Actor and Critic networks
         self.actor.fit(states, actions, sample_weight=advantages, epochs=1, verbose=0)
         self.critic.fit(states, reward, epochs=1, verbose=0)
-
-
-
-class Fugent_A3CAgent(A3CAgent):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-    def onehot_actionMap(self, state):
-        state = np.reshape(state, (1, self.history_length, self.stateSize+self.imgSize))
-        prediction = self.actor.predict(state)[0]
-        prediction = np.reshape(prediction, self.env.gridSize)
-        return prediction    
-        
-    def critic_act(self, state):
-        state = np.reshape(state, (1, self.history_length, self.stateSize+self.imgSize))
-        prediction = float(self.critic.predict(state)[0][0])
-        return prediction
